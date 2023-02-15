@@ -26,9 +26,9 @@
             <div class="card-body">
                 <p class="login-box-msg">Aplikasi Pengaduan Masyarakat</p>
 
-                <form action="assets/index.html" method="post">
+                <form action="php/daftar/daftar_masyarakat.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="NIK">
+                        <input type="number" class="form-control" placeholder="NIK" name="nik">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-key"></span>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Nama">
+                        <input type="text" class="form-control" placeholder="Nama" name="nama">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username">
+                        <input type="text" class="form-control" placeholder="Username" name="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-pen"></span>
@@ -53,7 +53,7 @@
                     </div>
                     
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" id="myPass" name="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="Telepon">
+                        <input type="number" class="form-control" placeholder="Telepon" name="no-telp">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-phone"></span>
@@ -71,15 +71,15 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" name="terms">
-                                <label for="terms" style="font-size: 14px;">
+                                <input type="checkbox" id="remember" onclick="showPass()">
+                                <label for="remember" style="font-size: 14px;">
                                     Tampilkan Password
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block rounded-pill">Register</button>
+                            <button type="submit" class="btn btn-primary btn-block rounded-pill" name="daftar-masyarakat">Register</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -100,6 +100,7 @@
     <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.min.js"></script>
+    <script src="js/showPass.js "></script>
 </body>
 
 </html>

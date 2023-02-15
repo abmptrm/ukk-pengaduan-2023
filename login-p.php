@@ -22,10 +22,10 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <h1 href="login.php" class="h1 font-weight-bold">Login <br><span style="font-size: 20px;">Masyarakat</span></h1>
+                <h1 href="login.php" class="h1 font-weight-bold">Login</h1>
             </div>
             <div class="card-body">
-                <p class="login-box-msg" style="font-size: 18px;">Aplikasi Pengaduan Masyarakat</p>
+                <p class="login-box-msg" style="font-size: 18px;">Petugas/Admin</p>
 
                 <?php 
                     if(isset($_GET['info'])){
@@ -71,7 +71,7 @@
 
                 <form action="php/cek_login/cek_petugas.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username">
+                        <input type="text" name="username" class="form-control" placeholder="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3 ">
-                        <input type="password" class="form-control" placeholder="Password" id="myPass">
+                        <input type="password" class="form-control" placeholder="Password" id="myPass" name="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -98,7 +98,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block rounded-pill">Masuk</button>
+                            <button type="submit" class="btn btn-primary btn-block rounded-pill" name="masuk-petugas">Masuk</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -131,3 +131,5 @@
 </body>
 
 </html>
+
+
