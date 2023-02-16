@@ -22,10 +22,11 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <h1 href="login.php" class="h1 font-weight-bold">Login <br><span style="font-size: 20px;">Masyarakat</span></h1>
+                <h1 href="login.php" class="h1 font-weight-bold">Login </h1>
             </div>
             <div class="card-body">
-                <p class="login-box-msg" style="font-size: 18px;">Aplikasi Pengaduan Masyarakat</p>
+                <center><img src="assets/image/user.png" alt="admin" width="50" class="mb-2"></center>
+                <p class="login-box-msg font-weight-bold" style="font-size: 18px;"> Masyarakat</p>
 
                 <?php 
                     if(isset($_GET['info'])){

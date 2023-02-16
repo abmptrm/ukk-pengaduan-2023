@@ -1,8 +1,12 @@
+<?php 
+    session_start();
+
+    if($_SESSION['status']!="login"){
+        header("location: login.php?pesan=belum_login");
+    }
+?>
+
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 
 <head>
@@ -27,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container">
                 <div class="title">
 
-                    <a href="index.html" class="navbar-brand">
+                    <a href="index.php" class="navbar-brand">
                         <!-- <img src="assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
                         <span class="brand-text font-weight-normal text-primary">Aplikasi Pengaduan Masyarakat</span>
                     </a>
@@ -36,16 +40,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 
                 <ul class="navbar-nav text-center" style="font-size:17px">
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="index.php" class="nav-link active">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="pengaduan.html" class="nav-link">Tulis Pengaduan</a>
+                        <a href="pengaduan.php" class="nav-link">Tulis Pengaduan</a>
                     </li>
                     
                 </ul>
                 
                 <div class="nav-item">
-                    <a class="nav-link" href="login.html">
+                    <a class="nav-link" href="login.php">
                         <i class="fas fa-user"></i> 
                         LOGIN
                     </a>
@@ -84,10 +88,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <h5 class="card-title m-0" style="font-size:30px">Home</h5>
                                 </div>
                                 <div class="card-body">
-                                    <h6 class="card-title mb-3" style="font-size:25px">Selamat Datang Di Aplikasi Pengaduan Masyarakat</h6>
+                                    <h6 class="card-title mb-3" style="font-size:25px">Selamat Datang <b><?php echo ucwords($_SESSION['username']); ?></b> Di Aplikasi Pengaduan Masyarakat</h6>
 
                                     <p class="card-text">Laporkan masalah lingkungan Anda dengan mudah dan efisien. Aplikasi pengaduan kami akan membantu memastikan bahwa masalah Anda mendapat perhatian yang layak.</p>
-                                    <a href="#" class="btn btn-primary px-5 ">Mulai</a>
+                                    <a href="pengaduan.php" class="btn btn-primary px-5 ">Mulai</a>
                                 </div>
                             </div>
                         </div>

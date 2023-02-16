@@ -23,7 +23,7 @@ include '../koneksi/koneksi.php';
 			$_SESSION['nik'] = $nik;
 			$_SESSION['nama'] = $nama;
 			$_SESSION['status'] = "login";
-			header("location: ../../index.html");
+			header("location: ../../index.php");
 
 			
 		}else{

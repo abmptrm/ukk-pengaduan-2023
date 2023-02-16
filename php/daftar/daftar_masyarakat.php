@@ -8,7 +8,7 @@
         $password = md5($_POST['password']);
         $telp = $_POST['no_telp'];
 
-        mysqli_query($koneksi, "INSERT INTO masyarakat VALUE('$nik', '$nama', '$username', '$password', '$telp')");
+        mysqli_query($koneksi, "INSERT INTO masyarakat VALUES('$nik', '$nama', '$username', '$password', '$telp')");
 
         header("location: ../../login.php");
     }
