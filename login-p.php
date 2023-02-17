@@ -25,7 +25,7 @@
                 <h1 href="login.php" class="h1 font-weight-bold">Login</h1>
             </div>
             <div class="card-body">
-            <center><img src="assets/image/admin.png" alt="admin" width="50" class="mb-2"></center>
+            <center><img src="assets/image/admin.png" alt="admin" width="70" class="mb-2"></center>
             <p class="login-box-msg font-weight-bold" style="font-size: 18px;"> Petugas/Admin</p>
 
                 <?php 

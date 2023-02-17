@@ -50,9 +50,9 @@
                 </ul>
 
                 <div class="nav-item">
-                    <a class="nav-link" href="login.php">
-                        <i class="fas fa-user"></i>
-                        LOGIN
+                    <a class="nav-link bg-danger font-weight-bold rounded" href="logout.php">
+                    <i class="fas fa-sign-out-alt pr-1"></i>
+                        LOGOUT
                     </a>
                 </div>
             </div>
@@ -104,28 +104,61 @@
 
                                             <tr>
                                                 <td>1.</td>
-                                                <td class="text-center"><img src="assets/image/Screenshot (1).png"
-                                                        width="150"></td>
-                                                <td class="text-center pt-4">
+                                                <td class="text-center">
+                                                    <img data-enlargable src="assets/image/Screenshot (1).png"  width="150">
+                                                    <a href="" data-toggle="modal" data-target="#modal-view-image" class="btn btn-sm btn-primary mt-2 px-3">
+                                                        Lihat Gambar
+                                                    </a>
+                                                </td>
+                                                <td class="text-center ">
                                                     2023-12-09
                                                 </td>
                                                 <td> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum
                                                     quidem nostrum inventore. Error aliquam quod quibusdam porro, sequi
                                                     debitis consequatur?</td>
-                                                <td class="text-center pt-4"><span
-                                                        class="badge badge-success px-3 py-2">Selesai</span></td>
+                                                <td class="text-center "><span
+                                                        class="badge badge-success px-3 py-2" style="font-size: 13px;">Selesai</span></td>
                                                 <td class="text-center">
-                                                    <a href="" class="btn btn-warning m-1" data-toggle="modal"
+                                                    <a href="" class="btn btn-info mx-2" data-toggle="modal"
                                                     data-target="#modal-edit">
                                                         <div class="fas fa-edit"></div>
                                                     </a>
-                                                    <a href="" class="btn btn-danger m-1">
+                                                    <a href="" class="btn btn-danger mx-2">
                                                         <div class="fas fa-trash"></div>
                                                     </a>
 
 
                                                 </td>
                                             </tr>
+
+                                            <!-- MODAL VIEW IMAGE -->
+                                            <div class="modal fade" id="modal-view-image">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Foto Pengaduan</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="text-center">
+                                                        <img src="assets/image/Screenshot (1).png" width="300">
+                                                        </div><hr>
+                                                        <div class="card-body">
+                                                        <div class="text-center">
+                                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat deserunt fugiat ab porro quaerat, soluta quis deleniti sed tempora mollitia!
+                                                        </div>
+                                                        </div>                                
+                                                    </div>
+                                                    <div class="modal-footer justify-content-between"> 
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+
+
                                             <!-- EDIT DATA MODAL -->
 
                                             <div class="modal fade" id="modal-edit">
@@ -216,7 +249,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleFormControlTextarea1">Isi
                                                             Laporan</label>
-                                                        <input type="text" name="nik" value="<?= $data['nik'] ?>">
+                                                        <input type="text" name="nik" value="<?= $data['nik'] ?>" hidden>
                                                         <textarea class="form-control"
                                                             id="exampleFormControlTextarea1"
                                                             rows="3" name="isi-laporan">
@@ -302,7 +335,9 @@
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="assets/dist/js/demo.js"></script>
+    <!-- <script src="assets/dist/js/demo.js"></script> -->
+
+    
 </body>
 
 </html>
