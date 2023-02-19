@@ -1,6 +1,8 @@
 <?php
     session_start();
 
+    include "php/koneksi/koneksi.php";
+
     if ($_SESSION['status'] != "login") {
         header("location: login.php?pesan=belum_login");
     }
@@ -102,22 +104,49 @@
                                         </thead>
                                         <tbody>
 
+                                            <?php
+
+                                                
+                                                
+                                                $no = 1; 
+
+                                                $nik = $_SESSION['nik'];
+
+                                                $query = "SELECT pengaduan.* FROM pengaduan 
+                                                INNER JOIN masyarakat ON pengaduan.nik = masyarakat.nik 
+                                                WHERE masyarakat.username = '$_SESSION[username]'";
+
+                                                $result = mysqli_query($koneksi, $query);
+
+                                                // Lakukan perulangan untuk membaca setiap baris hasil query
+                                                while ($row = mysqli_fetch_assoc($result)) {   
+                                                
+                                            ?>
+
                                             <tr>
-                                                <td>1.</td>
+                                                <td><?= $no++; ?></td>
                                                 <td class="text-center">
-                                                    <img data-enlargable src="assets/image/Screenshot (1).png"  width="150">
-                                                    <a href="" data-toggle="modal" data-target="#modal-view-image" class="btn btn-sm btn-primary mt-2 px-3">
-                                                        Lihat Gambar
+                                                    <img data-enlargable src="uploads/<?= $row['foto'] ?>"  width="150"><br>
+                                                    <!-- <a type="button" data-toggle="modal" data-target="#modalviewimage" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
+                                                        <i class="fa fa-expand"></i>&ensp; Lihat Gambar 
+                                                    </a> -->
+                                                    <a type="button" class="btn btn-sm btn-primary mt-2 px-3 view-image" id="<?= $_SESSION['nik'] ?>">
+                                                        <i class="fa fa-expand"></i>&ensp; Lihat Gambar 
                                                     </a>
                                                 </td>
+                                                <td class="text-center "><?= $row['tgl_pengaduan'] ?></td>
+                                                <td><?= $row['isi_laporan'] ?></td>
                                                 <td class="text-center ">
-                                                    2023-12-09
+                                                    <?php if ($row['status'] == '0') { ?>
+                                                        <span class="badge bg-warning">Menunggu</span>
+                                                    <?php } else if ($row['status'] == 'proses') { ?>
+                                                        <span class="badge bg-primary">Proses</span>
+                                                    <?php } else if ($row['status'] == 'tolak') { ?>
+                                                        <span class="badge bg-danger">Tolak</span>
+                                                    <?php } else { ?>
+                                                        <span class="badge bg-success">Selesai</span>
+                                                    <?php } ?>
                                                 </td>
-                                                <td> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum
-                                                    quidem nostrum inventore. Error aliquam quod quibusdam porro, sequi
-                                                    debitis consequatur?</td>
-                                                <td class="text-center "><span
-                                                        class="badge badge-success px-3 py-2" style="font-size: 13px;">Selesai</span></td>
                                                 <td class="text-center">
                                                     <a href="" class="btn btn-info mx-2" data-toggle="modal"
                                                     data-target="#modal-edit">
@@ -130,90 +159,16 @@
 
                                                 </td>
                                             </tr>
+                                            
 
-                                            <!-- MODAL VIEW IMAGE -->
-                                            <div class="modal fade" id="modal-view-image">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Foto Pengaduan</h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="text-center">
-                                                        <img src="assets/image/Screenshot (1).png" width="300">
-                                                        </div><hr>
-                                                        <div class="card-body">
-                                                        <div class="text-center">
-                                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat deserunt fugiat ab porro quaerat, soluta quis deleniti sed tempora mollitia!
-                                                        </div>
-                                                        </div>                                
-                                                    </div>
-                                                    <div class="modal-footer justify-content-between"> 
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                </div>
+                                            <?php
+                                                }
+                                            ?>
 
 
-                                            <!-- EDIT DATA MODAL -->
+                                            
 
-                                            <div class="modal fade" id="modal-edit">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Edit Pengaduan </h4>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form>
-                                                                <div class="card-body">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleFormControlTextarea1">Isi
-                                                                            Laporan</label>
-                                                                        <textarea class="form-control"
-                                                                            id="exampleFormControlTextarea1"
-                                                                            rows="3"></textarea>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputFile">Upload Foto</label>
-                                                                        <div class="input-group">
-                                                                            <div class="custom-file">
-                                                                                <input type="file" class="custom-file-input"
-                                                                                    id="exampleInputFile">
-                                                                                <label class="custom-file-label"
-                                                                                    for="exampleInputFile">Choose file</label>
-                                                                            </div>
-                                                                            <!-- <div class="input-group-append">
-                                                                                <span class="input-group-text">Upload</span>
-                                                                            </div> -->
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                                <!-- /.card-body -->
-
-
-                                                            </form>
-                                                        </div>
-                                                        <div class="modal-footer justify-content-between">
-                                                            <button type="button" class="btn btn-danger"
-                                                                data-dismiss="modal">Batal</button>
-                                                            <button type="button" class="btn btn-primary" name="simpan">Simpan
-                                                                Pengaduan</button>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.modal-content -->
-                                                </div>
-                                                <!-- /.modal-dialog -->
-                                            </div>
-                                            <!-- /.modal -->
+                                            
                                         </tbody>
                                     </table>
 
@@ -229,8 +184,8 @@
                             <!-- Modal Tambah -->
                             <?php  
                                 include "php/koneksi/koneksi.php";
-                                $masyarakat = mysqli_query($koneksi, "SELECT * FROM masyarakat WHERE username = '$_SESSION[username]'");
-                                while ($data = mysqli_fetch_array($masyarakat)) {
+                                $masyarakat = mysqli_query($koneksi, "SELECT * FROM masyarakat WHERE username='$_SESSION[username]'");
+                                while ($data = mysqli_fetch_assoc($masyarakat)) {
                             ?>
 
                             <div class="modal fade" id="modal-tambah">
@@ -244,45 +199,46 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="post">
+                                            <form method="post" action="php/pengaduan/simpan_pengaduan.php" enctype="multipart/form-data">
                                                 <div class="card-body">
                                                     <div class="form-group">
-                                                        <label for="exampleFormControlTextarea1">Isi
-                                                            Laporan</label>
-                                                        <input type="text" name="nik" value="<?= $data['nik'] ?>" hidden>
-                                                        <textarea class="form-control"
-                                                            id="exampleFormControlTextarea1"
-                                                            rows="3" name="isi-laporan">
-                                                        </textarea>
+                                                        <label>Isi Laporan</label>
+                                                        <input type="text" name="nik" value="<?= $data['nik']; ?>" hidden>
+                                                        <textarea class="form-control" rows="3" name="isi-laporan" placeholder="Isi Laporan"></textarea>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">Upload Foto</label>
+                                                    <!-- <div class="form-group">
                                                         <div class="input-group">
                                                             <div class="custom-file">
-                                                                <input type="file" class="custom-file-input"
-                                                                    id="exampleInputFile">
-                                                                <label class="custom-file-label"
-                                                                    for="exampleInputFile">Choose file</label>
+                                                                <input type="file" name="foto" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="form-group">
+                                                        <label for="">Upload Foto</label>
+                                                        <div class="input-group mb-3">
+                                                            <div class="custom-file">
+                                                                
+                                                                <input type="file" class="custom-file-input" id="inputGroupFile02" name="foto"/>
+                                                                <label class="custom-file-label" for="inputGroupFile02">Pilih Gambar</label>
                                                             </div>
                                                             <!-- <div class="input-group-append">
-                                                                <span class="input-group-text">Upload</span>
+                                                                <button class="btn btn-dark">Upload </button>
                                                             </div> -->
                                                         </div>
                                                     </div>
+                                                    
 
                                                 </div>
                                                 <!-- /.card-body -->
-
-
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary" name="simpan-pengaduan">Simpan
+                                                        Pengaduan</button>
+                                                        
+                                                        
+                                                    </div>
                                             </form>
-                                        </div>
-                                        <div class="modal-footer justify-content-between">
-                                            <button type="button" class="btn btn-danger"
-                                                data-dismiss="modal">Batal</button>
-                                            <button type="button" class="btn btn-primary" name="simpan">Simpan
-                                                Pengaduan</button>
-
-                                            
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -294,6 +250,91 @@
                             <?php
                                 }
                             ?>
+
+                            <!-- EDIT DATA MODAL -->
+
+                            <div class="modal fade" id="modal-edit">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Edit Pengaduan </h4>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" action="php/pengaduan/edit_pengaduan.php" enctype="multipart/form-data">
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label>Isi Laporan</label>
+                                                        <input type="text" name="nik" value="<?= $data['nik']; ?>" hidden>
+                                                        <textarea class="form-control"
+                                                            rows="3" name="isi-laporan"
+                                                            placeholder="Isi Laporan">
+                                                        </textarea>
+                                                    </div>
+                                                    <div class="input-group mb-3">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="inputGroupFile02"/>
+                                                            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-default">Upload</button>
+                                                        </div>
+                                                    </div>
+                                                    
+
+                                                </div>
+                                                <!-- /.card-body -->
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary" name="simpan-pengaduan">Simpan
+                                                        Pengaduan</button>
+                                                        
+                                                        
+                                                    </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+
+                            <!-- MODAL VIEW IMAGE -->
+
+                        
+                            <!-- <div class="modal fade" id="modalviewimage" aria-hidden="true">
+                                
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Foto Pengaduan</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    <div class="modal-body">
+                                        <div class="text-center">
+                                            <img src="uploads/ //$data['foto']" width="300">
+                                            </div><hr>
+                                            <div class="card-body">
+                                            <div class="text-center">
+                                                 // $data['isi_laporan']
+                                            </div>
+                                        </div>                                
+                                    </div>
+                                        <div class="modal-footer justify-content-between"> 
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div> -->
+                           
+                        
 
                             
 
@@ -334,6 +375,42 @@
     <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.min.js"></script>
+    <!-- Popper Js -->
+    <script   pt src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $('.view-image').popover({
+                title:fetchData,
+                html:true,
+                placement:'right',
+                trigger:'click'
+            });
+
+            function fetchData(){
+                var ambil_data = '';
+                var element = $(this);
+                var id = element.attr("id");
+                $.ajax({
+                    url:"ambil_data.php",
+                    method:"POST",
+                    async:false,
+                    data:{id:id},
+                    success:function(data){
+                        ambil_data = data;
+                    }
+                });
+                return ambil_data;
+            }
+        });
+    </script>
+
+    <!-- Show Filename In Input File Image -->
+    <script src="js/showFilename.js"></script>
+
+
+
     <!-- AdminLTE for demo purposes -->
     <!-- <script src="assets/dist/js/demo.js"></script> -->
 

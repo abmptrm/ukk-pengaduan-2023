@@ -5,7 +5,7 @@
     // menghubungkan php dengan koneksi database
     include '../koneksi/koneksi.php';
 
-    if (isset($_POST['masuk-petugas'])) {
+    if (isset($_POST['masuk_petugas'])) {
         
         // menangkap data yang dikirim dari form login
         $username = mysqli_real_escape_string($koneksi, $_POST['username']);
