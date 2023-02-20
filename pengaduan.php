@@ -121,13 +121,11 @@
                                             <tr>
                                                 <td><?= $no++; ?></td>
                                                 <td class="text-center">
-                                                    <img data-enlargable src="uploads/<?= $row['foto'] ?>"  width="150"><br>
+                                                    <img data-enlargable src="uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="180"><br>
                                                     <a type="button" data-toggle="modal" data-target="#modalviewimage<?= $row['id_pengaduan'] ?>" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
                                                         <i class="fa fa-expand"></i>&ensp; Lihat Gambar 
                                                     </a>
-                                                    <!-- <a type="button" class="btn btn-sm btn-primary mt-2 px-3 view-image" id="<?= $_SESSION['nik'] ?>">
-                                                        <i class="fa fa-expand"></i>&ensp; Lihat Gambar 
-                                                    </a> -->
+                                                    
                                                 </td>
                                                 <td class="text-center "><?= $row['tgl_pengaduan'] ?></td>
                                                 <td><?= $row['isi_laporan'] ?></td>
@@ -147,7 +145,7 @@
                                                     data-target="#modal-edit">
                                                         <div class="fas fa-edit"></div>
                                                     </a>
-                                                    <a href="" class="btn btn-danger mx-2">
+                                                    <a href="php/pengaduan/hapus_pengaduan.php?id_pengaduan=<?php echo $row['id_pengaduan']?>" class="btn btn-danger mx-2">
                                                         <div class="fas fa-trash"></div>
                                                     </a>
 
@@ -324,7 +322,7 @@
                                         </div>
                                     <div class="modal-body">
                                         <div class="text-center">
-                                            <img src="uploads/<?= $row['foto'] ?>" width="300">
+                                            <img src="uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="300">
                                             </div><hr>
                                             <div class="card-body">
                                             <div class="text-center">
