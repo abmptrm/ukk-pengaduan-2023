@@ -15,12 +15,13 @@ include '../koneksi/koneksi.php';
 		$login = mysqli_query($koneksi, "select * from masyarakat where username='$username' and password='$password'");
 		// menghitung jumlah data yang ditemukan
 		$cek = mysqli_num_rows($login);
+		$ktl = mysqli_fetch_array($login);
 
 		// cek apakah username dan password di temukan pada database
 		if($cek > 0){
 
 			$_SESSION['username'] = $username;
-			$_SESSION['nik'] = $nik;
+			$_SESSION['nik'] = $ktl['nik'];
 			$_SESSION['nama'] = $nama;
 			$_SESSION['status'] = "login";
 			header("location: ../../index.php");

@@ -104,17 +104,12 @@
                                         </thead>
                                         <tbody>
 
-                                            <?php
-
-                                                
-                                                
+                                            <?php       
                                                 $no = 1; 
 
                                                 $nik = $_SESSION['nik'];
 
-                                                $query = "SELECT pengaduan.* FROM pengaduan 
-                                                INNER JOIN masyarakat ON pengaduan.nik = masyarakat.nik 
-                                                WHERE masyarakat.username = '$_SESSION[username]'";
+                                                $query = "SELECT * FROM pengaduan WHERE nik='$nik'";
 
                                                 $result = mysqli_query($koneksi, $query);
 
@@ -127,12 +122,12 @@
                                                 <td><?= $no++; ?></td>
                                                 <td class="text-center">
                                                     <img data-enlargable src="uploads/<?= $row['foto'] ?>"  width="150"><br>
-                                                    <!-- <a type="button" data-toggle="modal" data-target="#modalviewimage" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
-                                                        <i class="fa fa-expand"></i>&ensp; Lihat Gambar 
-                                                    </a> -->
-                                                    <a type="button" class="btn btn-sm btn-primary mt-2 px-3 view-image" id="<?= $_SESSION['nik'] ?>">
+                                                    <a type="button" data-toggle="modal" data-target="#modalviewimage<?= $row['id_pengaduan'] ?>" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
                                                         <i class="fa fa-expand"></i>&ensp; Lihat Gambar 
                                                     </a>
+                                                    <!-- <a type="button" class="btn btn-sm btn-primary mt-2 px-3 view-image" id="<?= $_SESSION['nik'] ?>">
+                                                        <i class="fa fa-expand"></i>&ensp; Lihat Gambar 
+                                                    </a> -->
                                                 </td>
                                                 <td class="text-center "><?= $row['tgl_pengaduan'] ?></td>
                                                 <td><?= $row['isi_laporan'] ?></td>
@@ -304,9 +299,20 @@
                             </div>
 
                             <!-- MODAL VIEW IMAGE -->
+                            
+                            <?php
+                                include 'php/koneksi/koneksi.php';
 
-                        
-                            <!-- <div class="modal fade" id="modalviewimage" aria-hidden="true">
+                                $nik = $_SESSION['nik'];
+                                $query = "SELECT * FROM pengaduan WHERE nik='$nik'";
+
+                                 $result = mysqli_query($koneksi, $query);
+
+                                // Lakukan perulangan untuk membaca setiap baris hasil query
+                                while ($row = mysqli_fetch_assoc($result)) {   
+                            ?>
+
+                            <div class="modal fade" id="modalviewimage<?= $row['id_pengaduan'] ?>" aria-hidden="true">
                                 
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -318,11 +324,11 @@
                                         </div>
                                     <div class="modal-body">
                                         <div class="text-center">
-                                            <img src="uploads/ //$data['foto']" width="300">
+                                            <img src="uploads/<?= $row['foto'] ?>" width="300">
                                             </div><hr>
                                             <div class="card-body">
                                             <div class="text-center">
-                                                 // $data['isi_laporan']
+                                                <?= $row['isi_laporan']?>
                                             </div>
                                         </div>                                
                                     </div>
@@ -332,7 +338,9 @@
                                     </div>
                                 </div>
                                 
-                            </div> -->
+                            </div>
+                            <?php } ?>
+
                            
                         
 
@@ -375,36 +383,6 @@
     <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="assets/dist/js/adminlte.min.js"></script>
-    <!-- Popper Js -->
-    <script   pt src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
-    <script>
-        $(document).ready(function(){
-
-            $('.view-image').popover({
-                title:fetchData,
-                html:true,
-                placement:'right',
-                trigger:'click'
-            });
-
-            function fetchData(){
-                var ambil_data = '';
-                var element = $(this);
-                var id = element.attr("id");
-                $.ajax({
-                    url:"ambil_data.php",
-                    method:"POST",
-                    async:false,
-                    data:{id:id},
-                    success:function(data){
-                        ambil_data = data;
-                    }
-                });
-                return ambil_data;
-            }
-        });
-    </script>
 
     <!-- Show Filename In Input File Image -->
     <script src="js/showFilename.js"></script>
