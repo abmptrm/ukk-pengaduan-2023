@@ -11,7 +11,7 @@
         $tgl_pengaduan = date('Y-m-d');
 
         $rand = rand();
-        $extension = array('png', 'jpg', 'jpeg', 'gif');
+        $extension = array('png', 'jpg', 'jpeg');
         $filename = $_FILES['foto']['name'];
         $size = $_FILES['foto']['size'];
         $ext = pathinfo($filename, PATHINFO_EXTENSION);

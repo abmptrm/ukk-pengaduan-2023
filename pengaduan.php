@@ -88,17 +88,24 @@
 
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h5 class="card-title m-0" style="font-size:30px">Tulis Pengaduan</h5>
+                                    <div class="card-title">
+                                        <h5 class=" m-0" style="font-size:30px">Tulis Pengaduan</h5>
+                                    </div>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-success px-4" data-toggle="modal"
+                                            data-target="#modal-tambah"><i class="fas fa-plus"></i>&ensp;Tambah Pengaduan
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th style="width: 10px">#</th>
-                                                <th>Foto</th>
-                                                <th>Tanggal Pengaduan</th>
+                                                <th style="width: 150px">Foto</th>
+                                                <th style="width: 150px">Tanggal Pengaduan</th>
                                                 <th>Isi Pengaduan</th>
-                                                <th>Status</th>
+                                                <th style="width: 150px">Status</th>
                                                 <th style="width: 150px">Aksi</th>
                                             </tr>
                                         </thead>
@@ -121,9 +128,9 @@
                                             <tr>
                                                 <td><?= $no++; ?></td>
                                                 <td class="text-center">
-                                                    <img data-enlargable src="uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="180"><br>
+                                                    <img data-enlargable src="uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="200"><br>
                                                     <a type="button" data-toggle="modal" data-target="#modalviewimage<?= $row['id_pengaduan'] ?>" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
-                                                        <i class="fa fa-expand"></i>&ensp; Lihat Gambar 
+                                                        <i class="fas fa-search-plus"></i> Lihat Gambar 
                                                     </a>
                                                     
                                                 </td>
@@ -142,7 +149,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <a href="" class="btn btn-info mx-2" data-toggle="modal"
-                                                    data-target="#modal-edit">
+                                                    data-target="#modal-edit<?= $row['id_pengaduan']?>">
                                                         <div class="fas fa-edit"></div>
                                                     </a>
                                                     <a href="php/pengaduan/hapus_pengaduan.php?id_pengaduan=<?php echo $row['id_pengaduan']?>" class="btn btn-danger mx-2">
@@ -152,6 +159,63 @@
 
                                                 </td>
                                             </tr>
+
+                                            <!-- MODAL EDIT DATA -->
+                                            <div class="modal fade" id="modal-edit<?= $row['id_pengaduan']?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Edit Pengaduan </h4>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="post" action="php/pengaduan/update_pengaduan.php" enctype="multipart/form-data">
+                                                                <div class="card-body">
+                                                                    <div class="form-group">
+                                                                        <label>Isi Laporan</label>
+                                                                        <input type="text" name="nik" value="<?= $row['nik']; ?>" hidden>
+                                                                        <input type="text" name="id_pengaduan" value="<?= $row['id_pengaduan']; ?>" hidden>
+                                                                        <textarea class="form-control"
+                                                                            rows="3" name="isi-laporan"
+                                                                            placeholder="Isi Laporan"><?= $row['isi_laporan']?></textarea>
+                                                                        
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Upload Foto</label>
+                                                                        <img src="uploads/<?= $row['foto']?>"  style="border:#007BFF solid 3px; border-radius:15px; width:100%;" class="mb-3" alt="foto pengaduan">
+                                                                        <div class="input-group mb-3">
+                                                                            <div class="custom-file">
+                                                                                <input type="file" class="custom-file-input" id="inputGroupFile02" name="foto"/>
+                                                                                <label class="custom-file-label" for="inputGroupFile02">Pilih Gambar</label>
+                                                                                <i style="float: left;font-size: 11px;color: red">Abaikan jika tidak merubah foto pengaduan</i>
+                                                                            </div>
+                                                                            <!-- <div class="input-group-append">
+                                                                                <button class="btn btn-dark">Upload </button>
+                                                                            </div> -->
+                                                                        </div>
+                                                                    </div>
+                                                                    
+
+                                                                </div>
+                                                                <!-- /.card-body -->
+                                                                <div class="modal-footer justify-content-between">
+                                                                    <button type="button" class="btn btn-danger"
+                                                                    data-dismiss="modal">Batal</button>
+                                                                    <button type="submit" class="btn btn-primary" name="update-pengaduan">Simpan
+                                                                        Pengaduan</button>
+                                                                        
+                                                                        
+                                                                    </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                            </div>
                                             
 
                                             <?php
@@ -167,9 +231,7 @@
 
                                 </div>
                                 <div class="card-footer">
-                                    <button type="button" class="btn btn-primary px-4" data-toggle="modal"
-                                        data-target="#modal-tambah">Tambah Pengaduan
-                                    </button>
+                                    
                                 </div>
                             </div>
                             <!-- card------ -->
@@ -226,7 +288,7 @@
                                                 <div class="modal-footer justify-content-between">
                                                     <button type="button" class="btn btn-danger"
                                                     data-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-primary" name="simpan-pengaduan">Simpan
+                                                    <button type="submit" class="btn btn-success" name="simpan-pengaduan">Simpan
                                                         Pengaduan</button>
                                                         
                                                         
@@ -245,56 +307,24 @@
                             ?>
 
                             <!-- EDIT DATA MODAL -->
+                            <?php
+                                include 'php/koneksi/koneksi.php';
 
-                            <div class="modal fade" id="modal-edit">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Edit Pengaduan </h4>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="post" action="php/pengaduan/edit_pengaduan.php" enctype="multipart/form-data">
-                                                <div class="card-body">
-                                                    <div class="form-group">
-                                                        <label>Isi Laporan</label>
-                                                        <input type="text" name="nik" value="<?= $data['nik']; ?>" hidden>
-                                                        <textarea class="form-control"
-                                                            rows="3" name="isi-laporan"
-                                                            placeholder="Isi Laporan">
-                                                        </textarea>
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="inputGroupFile02"/>
-                                                            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-                                                        </div>
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-default">Upload</button>
-                                                        </div>
-                                                    </div>
-                                                    
+                                $nik = $_SESSION['nik'];
 
-                                                </div>
-                                                <!-- /.card-body -->
-                                                <div class="modal-footer justify-content-between">
-                                                    <button type="button" class="btn btn-danger"
-                                                    data-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-primary" name="simpan-pengaduan">Simpan
-                                                        Pengaduan</button>
-                                                        
-                                                        
-                                                    </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
+                                $query = "SELECT * FROM pengaduan WHERE nik='$nik'";
+
+                                $result = mysqli_query($koneksi, $query);
+
+                                while ($row = mysqli_fetch_assoc($result)) {   
+
+                            ?>
+
+                            
+
+                            <?php
+                                }
+                            ?>
 
                             <!-- MODAL VIEW IMAGE -->
                             
@@ -322,11 +352,29 @@
                                         </div>
                                     <div class="modal-body">
                                         <div class="text-center">
-                                            <img src="uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="300">
+                                            <img src="uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; width:100%;">
                                             </div><hr>
                                             <div class="card-body">
-                                            <div class="text-center">
-                                                <?= $row['isi_laporan']?>
+                                            <div class="text-left">
+                                                <ul>
+                                                    <li><b>Tanggal Pengaduan :</b> <?= $row['tgl_pengaduan']?></li>
+                                                    <li><b>Isi Pengaduan : </b> <?= $row['isi_laporan']?></li>
+                                                    <li><b>Status Pengaduan : </b> 
+                                                        <?php if ($row['status'] == '0') { ?>
+                                                        <span class="badge bg-warning">Menunggu</span>
+                                                        <?php } else if ($row['status'] == 'proses') { ?>
+                                                            <span class="badge bg-primary">Di Proses</span>
+                                                        <?php } else if ($row['status'] == 'tolak') { ?>
+                                                            <span class="badge bg-danger">Di Tolak</span>
+                                                        <?php } else { ?>
+                                                            <span class="badge bg-success">Selesai</span>
+                                                        <?php } ?>
+                                                    </li>
+                                                    
+
+
+                                                </ul>
+                                                
                                             </div>
                                         </div>                                
                                     </div>

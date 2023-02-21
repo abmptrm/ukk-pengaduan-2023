@@ -9,7 +9,7 @@
 
     $namaFile = implode(".", $file);
     $lokasi = '../../uploads/' . $namaFile;
-
+    
     if (file_exists($lokasi)) {
         unlink('../../uploads/'.$namaFile);
     }
