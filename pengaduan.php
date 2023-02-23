@@ -176,8 +176,9 @@
                                                                 <div class="card-body">
                                                                     <div class="form-group">
                                                                         <label>Isi Laporan</label>
-                                                                        <input type="text" name="nik" value="<?= $row['nik']; ?>" hidden>
-                                                                        <input type="text" name="id_pengaduan" value="<?= $row['id_pengaduan']; ?>" hidden>
+                                                                        <input type="hidden" name="nik" value="<?= $row['nik']; ?>">
+                                                                        <input type="hidden" name="foto_lama" value="<?= $row['foto']; ?>">
+                                                                        <input type="hidden" name="id_pengaduan" value="<?= $row['id_pengaduan']; ?>">
                                                                         <textarea class="form-control"
                                                                             rows="3" name="isi-laporan"
                                                                             placeholder="Isi Laporan"><?= $row['isi_laporan']?></textarea>
@@ -186,11 +187,12 @@
                                                                     <div class="form-group">
                                                                         <label for="">Upload Foto</label>
                                                                         <img src="uploads/<?= $row['foto']?>"  style="border:#007BFF solid 3px; border-radius:15px; width:100%;" class="mb-3" alt="foto pengaduan">
+                                                                        <label for="">Upload Foto</label>
                                                                         <div class="input-group mb-3">
                                                                             <div class="custom-file">
+                                                                                
                                                                                 <input type="file" class="custom-file-input" id="inputGroupFile02" name="foto"/>
                                                                                 <label class="custom-file-label" for="inputGroupFile02">Pilih Gambar</label>
-                                                                                <i style="float: left;font-size: 11px;color: red">Abaikan jika tidak merubah foto pengaduan</i>
                                                                             </div>
                                                                             <!-- <div class="input-group-append">
                                                                                 <button class="btn btn-dark">Upload </button>
@@ -204,10 +206,8 @@
                                                                 <div class="modal-footer justify-content-between">
                                                                     <button type="button" class="btn btn-danger"
                                                                     data-dismiss="modal">Batal</button>
-                                                                    <button type="submit" class="btn btn-primary" name="update-pengaduan">Simpan
-                                                                        Pengaduan</button>
-                                                                        
-                                                                        
+                                                                    <button type="submit" class="btn btn-primary" name="update">Simpan
+                                                                        Pengaduan</button> 
                                                                     </div>
                                                             </form>
                                                         </div>
