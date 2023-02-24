@@ -3,7 +3,7 @@
 <?php
     include 'php/koneksi/koneksi.php';
 
-    $cnt = mysqli_query($koneksi, "SELECT COUNT(1) FROM petugas");
+    $cnt = mysqli_query($koneksi, "SELECT COUNT(1) FROM pengaduan");
     // echo $cnt;
 
     $row = mysqli_fetch_array($cnt);
