@@ -86,7 +86,7 @@
                 </form>
                 
                 <p class=" mt-5 text-center">
-                    Saya sudah punya akun. <a href="login.html">Masuk.</a>
+                    Saya sudah punya akun <a href="login.php">Masuk</a>
                 </p>
             </div>
             <!-- /.form-box -->

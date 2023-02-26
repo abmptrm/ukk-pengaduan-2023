@@ -112,7 +112,7 @@
                 <hr class="mt-3">
 
                 <p class="mb-0 mt-3 text-center">
-                    Login sebagai <a href="login.php" class="text-center">Masyarakat.</a>
+                    Login sebagai <a href="login.php" class="text-center">Masyarakat</a>
                 </p>
             </div>
             <!-- /.card-body -->

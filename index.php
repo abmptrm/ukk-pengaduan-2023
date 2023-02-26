@@ -49,7 +49,7 @@
                 </ul>
                 
                 <div class="nav-item">
-                    <a class="nav-link bg-danger font-weight-bold rounded" href="logout.php">
+                    <a class="nav-link bg-danger font-weight-bold rounded" href="../logout.php">
                     <i class="fas fa-sign-out-alt pr-1"></i>
                         LOGOUT
                     </a>

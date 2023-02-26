@@ -33,7 +33,7 @@
                 $_SESSION['password'] = $password;
                 $_SESSION['level'] = "admin";
                 // alihkan ke halaman dashboard admin
-                header("location: ../../administator/beranda.html");
+                header("location: ../../administator/beranda.php");
 
             // cek jika user login sebagai pegawai
             }else if($data['level']=="petugas"){
@@ -43,7 +43,7 @@
                 $_SESSION['password'] = $password;
                 $_SESSION['level'] = "petugas";
                 // alihkan ke halaman dashboard pegawai
-                header("location: ../../petugas/beranda.html");
+                header("location: ../../petugas/beranda.php");
 
             }else{
 

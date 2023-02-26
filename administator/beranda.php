@@ -106,19 +106,93 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                         <div class=" col-md-4">
 
-                                            <div class="small-box bg-secondary">
+                                            <div class="small-box bg-info">
                                                 <div class="inner pl-3">
-                                                  <h3><?= $total ?></h3>
-                                  
-                                                  <p>Pengaduan Masuk</p>
+                                                    <h3><?= $total ?></h3>
+                                    
+                                                    <p>Pengaduan Masuk</p>
                                                 </div>
                                                 <div class="icon">
-                                                  <i class="fa fa-tasks"></i>
+                                                    <i class="fa fa-tasks"></i>
                                                 </div>
-                                                <a href="#" class="small-box-footer">
-                                                
+                                                <a type="button" class="small-box-footer" data-toggle="modal" data-target="#modal-masuk">
+                                                    Cek Pengaduan&ensp;<i class="fas fa-arrow-circle-right"></i>
                                                 </a>
-                                              </div>
+                                            </div>
+
+                                            <div class="modal fade" id="modal-masuk">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Tabel Pengaduan Masuk</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 10px">#</th>
+                                                                        <th style="width: 150px">Foto</th>
+                                                                        <th style="width: 150px">Tanggal Pengaduan</th>
+                                                                        <th>Isi Pengaduan</th>
+                                                                        <th style="width: 150px">Status</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <?php       
+                                                                        $no = 1;                              
+                                                                        $query = "SELECT * FROM pengaduan";
+                                                                        $result = mysqli_query($koneksi, $query);
+                                                                        while ($row = mysqli_fetch_assoc($result)) {   
+                                                                        
+                                                                    ?>
+
+                                                                    <tr>
+                                                                        <td><?= $no++; ?></td>
+                                                                        <td class="text-center">
+                                                                            <img data-enlargable src="../uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="200"><br>
+                                                                            <!-- <a type="button" data-toggle="modal" data-target="#modalviewimage<?= $row['id_pengaduan'] ?>" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
+                                                                                <i class="fas fa-search-plus"></i> Lihat Gambar 
+                                                                            </a> -->
+                                                                            
+                                                                        </td>
+                                                                        <td class="text-center "><?= $row['tgl_pengaduan'] ?></td>
+                                                                        <td><?= $row['isi_laporan'] ?></td>
+                                                                        <td class="text-center ">
+                                                                            <?php if ($row['status'] == '0') { ?>
+                                                                                <span class="badge bg-warning">Menunggu</span>
+                                                                            <?php } else if ($row['status'] == 'proses') { ?>
+                                                                                <span class="badge bg-primary">Proses</span>
+                                                                            <?php } else if ($row['status'] == 'tolak') { ?>
+                                                                                <span class="badge bg-danger">Tolak</span>
+                                                                            <?php } else { ?>
+                                                                                <span class="badge bg-success">Selesai</span>
+                                                                            <?php } ?>
+                                                                        </td>
+                                                                        
+                                                                    </tr>
+
+                                                                
+
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                </div>
 
                                         </div>
 
@@ -144,9 +218,84 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <div class="icon">
                                                   <i class="fa fa-clock"></i>
                                                 </div>
-                                                <a href="#" class="small-box-footer">
+                                                <a type="button" class="small-box-footer" data-toggle="modal" data-target="#modal-menunggu">
+                                                    Cek Pengaduan&ensp;<i class="fas fa-arrow-circle-right"></i>
                                                 </a>
                                               </div>
+
+                                              <div class="modal fade" id="modal-menunggu">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Tabel Pengaduan Menunggu</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 10px">#</th>
+                                                                        <th style="width: 150px">Foto</th>
+                                                                        <th style="width: 150px">Tanggal Pengaduan</th>
+                                                                        <th>Isi Pengaduan</th>
+                                                                        <th style="width: 150px">Status</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <?php       
+                                                                        $no = 1;                              
+                                                                        $query = "SELECT * FROM pengaduan WHERE status='0'";
+                                                                        $result = mysqli_query($koneksi, $query);
+                                                                        while ($row = mysqli_fetch_assoc($result)) {   
+                                                                        
+                                                                    ?>
+
+                                                                    <tr>
+                                                                        <td><?= $no++; ?></td>
+                                                                        <td class="text-center">
+                                                                            <img data-enlargable src="../uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="200"><br>
+                                                                            <!-- <a type="button" data-toggle="modal" data-target="#modalviewimage<?= $row['id_pengaduan'] ?>" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
+                                                                                <i class="fas fa-search-plus"></i> Lihat Gambar 
+                                                                            </a> -->
+                                                                            
+                                                                        </td>
+                                                                        <td class="text-center "><?= $row['tgl_pengaduan'] ?></td>
+                                                                        <td><?= $row['isi_laporan'] ?></td>
+                                                                        <td class="text-center ">
+                                                                            <?php if ($row['status'] == '0') { ?>
+                                                                                <span class="badge bg-warning">Menunggu</span>
+                                                                            <?php } else if ($row['status'] == 'proses') { ?>
+                                                                                <span class="badge bg-primary">Proses</span>
+                                                                            <?php } else if ($row['status'] == 'tolak') { ?>
+                                                                                <span class="badge bg-danger">Tolak</span>
+                                                                            <?php } else { ?>
+                                                                                <span class="badge bg-success">Selesai</span>
+                                                                            <?php } ?>
+                                                                        </td>
+                                                                        
+                                                                    </tr>
+
+                                                                
+
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                </div>
  
                                         </div>
 
@@ -172,9 +321,84 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <div class="icon">
                                                   <i class="fa fa-code-branch"></i>
                                                 </div>
-                                                <a href="#" class="small-box-footer">
+                                                <a type="button" class="small-box-footer" data-toggle="modal" data-target="#modal-proses">
+                                                    Cek Pengaduan&ensp;<i class="fas fa-arrow-circle-right"></i>
                                                 </a>
                                               </div>
+
+                                              <div class="modal fade" id="modal-proses">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Tabel Pengaduan Proses</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 10px">#</th>
+                                                                        <th style="width: 150px">Foto</th>
+                                                                        <th style="width: 150px">Tanggal Pengaduan</th>
+                                                                        <th>Isi Pengaduan</th>
+                                                                        <th style="width: 150px">Status</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <?php       
+                                                                        $no = 1;                              
+                                                                        $query = "SELECT * FROM pengaduan WHERE status='proses'";
+                                                                        $result = mysqli_query($koneksi, $query);
+                                                                        while ($row = mysqli_fetch_assoc($result)) {   
+                                                                        
+                                                                    ?>
+
+                                                                    <tr>
+                                                                        <td><?= $no++; ?></td>
+                                                                        <td class="text-center">
+                                                                            <img data-enlargable src="../uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="200"><br>
+                                                                            <!-- <a type="button" data-toggle="modal" data-target="#modalviewimage<?= $row['id_pengaduan'] ?>" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
+                                                                                <i class="fas fa-search-plus"></i> Lihat Gambar 
+                                                                            </a> -->
+                                                                            
+                                                                        </td>
+                                                                        <td class="text-center "><?= $row['tgl_pengaduan'] ?></td>
+                                                                        <td><?= $row['isi_laporan'] ?></td>
+                                                                        <td class="text-center ">
+                                                                            <?php if ($row['status'] == '0') { ?>
+                                                                                <span class="badge bg-warning">Menunggu</span>
+                                                                            <?php } else if ($row['status'] == 'proses') { ?>
+                                                                                <span class="badge bg-primary">Proses</span>
+                                                                            <?php } else if ($row['status'] == 'tolak') { ?>
+                                                                                <span class="badge bg-danger">Tolak</span>
+                                                                            <?php } else { ?>
+                                                                                <span class="badge bg-success">Selesai</span>
+                                                                            <?php } ?>
+                                                                        </td>
+                                                                        
+                                                                    </tr>
+
+                                                                
+
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                </div>
  
                                         </div>
 
@@ -201,9 +425,84 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <div class="icon">
                                                   <i class="fa fa-check"></i>
                                                 </div>
-                                                <a href="#" class="small-box-footer">
+                                                <a type="button" class="small-box-footer" data-toggle="modal" data-target="#modal-selesai">
+                                                    Cek Pengaduan&ensp;<i class="fas fa-arrow-circle-right"></i>
                                                 </a>
                                               </div>
+
+                                              <div class="modal fade" id="modal-selesai">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Tabel Pengaduan Selesai</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 10px">#</th>
+                                                                        <th style="width: 150px">Foto</th>
+                                                                        <th style="width: 150px">Tanggal Pengaduan</th>
+                                                                        <th>Isi Pengaduan</th>
+                                                                        <th style="width: 150px">Status</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <?php       
+                                                                        $no = 1;                              
+                                                                        $query = "SELECT * FROM pengaduan WHERE status='selesai'";
+                                                                        $result = mysqli_query($koneksi, $query);
+                                                                        while ($row = mysqli_fetch_assoc($result)) {   
+                                                                        
+                                                                    ?>
+
+                                                                    <tr>
+                                                                        <td><?= $no++; ?></td>
+                                                                        <td class="text-center">
+                                                                            <img data-enlargable src="../uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="200"><br>
+                                                                            <!-- <a type="button" data-toggle="modal" data-target="#modalviewimage<?= $row['id_pengaduan'] ?>" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
+                                                                                <i class="fas fa-search-plus"></i> Lihat Gambar 
+                                                                            </a> -->
+                                                                            
+                                                                        </td>
+                                                                        <td class="text-center "><?= $row['tgl_pengaduan'] ?></td>
+                                                                        <td><?= $row['isi_laporan'] ?></td>
+                                                                        <td class="text-center ">
+                                                                            <?php if ($row['status'] == '0') { ?>
+                                                                                <span class="badge bg-warning">Menunggu</span>
+                                                                            <?php } else if ($row['status'] == 'proses') { ?>
+                                                                                <span class="badge bg-primary">Proses</span>
+                                                                            <?php } else if ($row['status'] == 'tolak') { ?>
+                                                                                <span class="badge bg-danger">Tolak</span>
+                                                                            <?php } else { ?>
+                                                                                <span class="badge bg-success">Selesai</span>
+                                                                            <?php } ?>
+                                                                        </td>
+                                                                        
+                                                                    </tr>
+
+                                                                
+
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                </div>
  
                                         </div>
 
@@ -229,10 +528,101 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <div class="icon">
                                                   <i class="fas fa-times"></i>
                                                 </div>
-                                                <a href="#" class="small-box-footer">
+                                                <a type="button" class="small-box-footer" data-toggle="modal" data-target="#modal-tolak">
+                                                    Cek Pengaduan&ensp;<i class="fas fa-arrow-circle-right"></i>
                                                 </a>
                                               </div>
+
+                                              <div class="modal fade" id="modal-tolak">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Tabel Pengaduan Di Tolak</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 10px">#</th>
+                                                                        <th style="width: 150px">Foto</th>
+                                                                        <th style="width: 150px">Tanggal Pengaduan</th>
+                                                                        <th>Isi Pengaduan</th>
+                                                                        <th style="width: 150px">Status</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <?php       
+                                                                        $no = 1;                              
+                                                                        $query = "SELECT * FROM pengaduan WHERE status='ditolak'";
+                                                                        $result = mysqli_query($koneksi, $query);
+                                                                        while ($row = mysqli_fetch_assoc($result)) {   
+                                                                        
+                                                                    ?>
+
+                                                                    <tr>
+                                                                        <td><?= $no++; ?></td>
+                                                                        <td class="text-center">
+                                                                            <img data-enlargable src="../uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="200"><br>
+                                                                            <!-- <a type="button" data-toggle="modal" data-target="#modalviewimage<?= $row['id_pengaduan'] ?>" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
+                                                                                <i class="fas fa-search-plus"></i> Lihat Gambar 
+                                                                            </a> -->
+                                                                            
+                                                                        </td>
+                                                                        <td class="text-center "><?= $row['tgl_pengaduan'] ?></td>
+                                                                        <td><?= $row['isi_laporan'] ?></td>
+                                                                        <td class="text-center ">
+                                                                            <?php if ($row['status'] == '0') { ?>
+                                                                                <span class="badge bg-warning">Menunggu</span>
+                                                                            <?php } else if ($row['status'] == 'proses') { ?>
+                                                                                <span class="badge bg-primary">Proses</span>
+                                                                            <?php } else if ($row['status'] == 'ditolak') { ?>
+                                                                                <span class="badge bg-danger">Tolak</span>
+                                                                            <?php } else { ?>
+                                                                                <span class="badge bg-success">Selesai</span>
+                                                                            <?php } ?>
+                                                                        </td>
+                                                                        
+                                                                    </tr>
+
+                                                                
+
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                </div>
  
+                                        </div>
+
+                                        <div class=" col-md-4">
+                                            <div class="small-box bg-secondary">
+                                                <div class="inner">
+                                                    <h3>Segera Hadir</h3>
+                                    
+                                                    <p>Segera Hadir</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fas fa-tools"></i>
+                                                </div>
+                                                <a href="#" class="btn small-box-footer disabled">
+                                                    Cek Pengaduan&ensp;<i class="fas fa-arrow-circle-right"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                         
                                     </div>
