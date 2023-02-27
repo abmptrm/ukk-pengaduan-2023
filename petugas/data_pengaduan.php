@@ -4,7 +4,7 @@
     include "../php/koneksi/koneksi.php";
 
     // cek apakah yang mengakses halaman ini sudah login
-    if($_SESSION['level']==""){
+    if ($_SESSION['level'] == "") {
         header("location:../login-p.php?info=login");
     }
 
@@ -19,8 +19,7 @@
     <title>Aplikasi Pengaduan Masyarakat</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
@@ -57,7 +56,7 @@
 
                 <div class="nav-item">
                     <a class="nav-link bg-danger font-weight-bold rounded" href="../logout.php">
-                    <i class="fas fa-sign-out-alt pr-1"></i>
+                        <i class="fas fa-sign-out-alt pr-1"></i>
                         LOGOUT
                     </a>
                 </div>
@@ -75,7 +74,7 @@
                             <h1 class="m-0">Aplikasi Pengaduan Masyarakat</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
-                            
+
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -93,7 +92,7 @@
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h5 class=" m-0" style="font-size:30px">Tulis Pengaduan</h5>
+                                        <h5 class=" m-0" style="font-size:30px">Data Pengaduan</h5>
                                     </div>
                                     <!-- <div class="card-tools">
                                         <button type="button" class="btn btn-success px-4" data-toggle="modal"
@@ -115,196 +114,181 @@
                                         </thead>
                                         <tbody>
 
-                                            <?php       
-                                                $no = 1; 
-                                                $query = "SELECT * FROM pengaduan";
+                                            <?php
+                                            $no = 1;
+                                            $query = "SELECT * FROM pengaduan";
 
-                                                $result = mysqli_query($koneksi, $query);
+                                            $result = mysqli_query($koneksi, $query);
 
-                                                while ($row = mysqli_fetch_assoc($result)) {   
-                                                
+                                            while ($row = mysqli_fetch_assoc($result)) {
+
                                             ?>
 
-                                            <tr>
-                                                <td><?= $no++; ?></td>
-                                                <td class="text-center">
-                                                    <img data-enlargable src="../uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="200"><br>
-                                                    <a type="button" data-toggle="modal" data-target="#modalviewimage<?= $row['id_pengaduan'] ?>" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
-                                                        <i class="fas fa-search-plus"></i> Lihat Gambar 
-                                                    </a>
-                                                    
-                                                </td>
-                                                <td class="text-center "><?= $row['tgl_pengaduan'] ?></td>
-                                                <td><?= $row['isi_laporan'] ?></td>
-                                                <td class="text-center ">
-                                                    <?php if ($row['status'] == '0') { ?>
-                                                        <span class="badge bg-warning">Menunggu</span>
-                                                    <?php } else if ($row['status'] == 'proses') { ?>
-                                                        <span class="badge bg-primary">Proses</span>
-                                                    <?php } else if ($row['status'] == 'tolak') { ?>
-                                                        <span class="badge bg-danger">Tolak</span>
-                                                    <?php } else { ?>
-                                                        <span class="badge bg-success">Selesai</span>
-                                                    <?php } ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <a href="" class="btn btn-info mx-2" data-toggle="modal"
-                                                    data-target="#modal-tanggapi<?= $row['id_pengaduan']?>">
-                                                        <i class="fas fa-edit"></i> Tanggapi
-                                                    </a>
-                                                    <!-- <a href="php/pengaduan/hapus_pengaduan.php?id_pengaduan=<?php echo $row['id_pengaduan']?>" class="btn btn-danger mx-2">
+                                                <tr>
+                                                    <td><?= $no++; ?></td>
+                                                    <td class="text-center">
+                                                        <img data-enlargable src="../uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; " width="200"><br>
+                                                        <a type="button" data-toggle="modal" data-target="#modalviewimage<?= $row['id_pengaduan'] ?>" class="btn btn-sm btn-primary mt-2 px-3" onclick="ShowDetailImage()">
+                                                            <i class="fas fa-search-plus"></i> Lihat Gambar
+                                                        </a>
+
+                                                    </td>
+                                                    <td class="text-center "><?= $row['tgl_pengaduan'] ?></td>
+                                                    <td><?= $row['isi_laporan'] ?></td>
+                                                    <td class="text-center ">
+                                                        <?php if ($row['status'] == '0') { ?>
+                                                            <span class="badge bg-warning">Menunggu</span>
+                                                        <?php } else if ($row['status'] == 'proses') { ?>
+                                                            <span class="badge bg-primary">Di Proses</span>
+                                                        <?php } else if ($row['status'] == 'ditolak') { ?>
+                                                            <span class="badge bg-danger">Di Tolak</span>
+                                                        <?php } else { ?>
+                                                            <span class="badge bg-success">Selesai</span>
+                                                        <?php } ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a href="" class="btn btn-info mx-2" data-toggle="modal" data-target="#modal-tanggapi<?= $row['id_pengaduan'] ?>">
+                                                            <i class="fas fa-edit"></i> Tanggapi
+                                                        </a>
+                                                        <!-- <a href="php/pengaduan/hapus_pengaduan.php?id_pengaduan=<?php echo $row['id_pengaduan'] ?>" class="btn btn-danger mx-2">
                                                         <div class="fas fa-trash"></div>
                                                     </a> -->
 
 
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
 
-                                            <!-- MODAL EDIT DATA -->
-                                            <div class="modal fade" id="modal-tanggapi<?= $row['id_pengaduan']?>">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Verifikasi dan Isi Tanggapan</h4>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="post" action="../php/tanggapan/simpan_tanggapan.php" enctype="multipart/form-data">
-                                                                <div class="card-body">
-                                                                    <input type="hidden" name="id_pengaduan" value="<?= $row['id_pengaduan']; ?>">
-                                                                    
-                                                                    <?php
-                                                                    
-                                                                        include '../php/koneksi/koneksi.php';
+                                                <!-- MODAL EDIT DATA -->
+                                                <div class="modal fade" id="modal-tanggapi<?= $row['id_pengaduan'] ?>">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Verifikasi dan Isi Tanggapan</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form method="post" action="../php/tanggapan/simpan_tanggapan.php" enctype="multipart/form-data">
+                                                                    <div class="card-body">
+                                                                        <input type="hidden" name="id_pengaduan" value="<?= $row['id_pengaduan']; ?>">
+
+                                                                        <?php
 
                                                                         $id_petugas = $_SESSION['id_petugas'];
 
-                                                                        $petugas_login = mysqli_query($koneksi, "SELECT * FROM petugas WHERE id_petugas='$id_petugas'");
-                                                                        $rows = mysqli_fetch_assoc($petugas_login);
-                                                                            # code...
+                                                                        ?>
+                                                                        <input type="hidden" name="id_petugas" value="<?= $id_petugas ?>">  
                                                                         
-                                                                    ?>
-                                                                    <input type="hidden" name="id_petugas" value="<?= $id_petugas ?>">
-                                                                   
-                                                                    <div class="form-group">
-                                                                        <label>Verifikasi</label>
-                                                                        <select class="form-control" name="status">
-                                                                            <option value="proses">Proses</option>
-                                                                            <option value="ditolak">Tolak</option>
-                                                                            <option value="selesai">Selesai</option>
-                                                                        </select>
+                                                                        <div class="form-group">
+                                                                            <label>Verifikasi</label>
+                                                                            <select class="form-control" name="status">
+                                                                                <option value="proses">Proses</option>
+                                                                                <option value="ditolak">Tolak</option>
+                                                                                <option value="selesai">Selesai</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Isi Tanggapan</label>
+                                                                            <textarea class="form-control" rows="3" name="isi_tanggapan" placeholder="Isi Tanggapan"></textarea>
+
+                                                                        </div>
+
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label>Isi Tanggapan</label>
-                                                                        <textarea class="form-control"
-                                                                            rows="3" name="isi-tanggapan"
-                                                                            placeholder="Isi Tanggapan"></textarea>
-                                                                        
+                                                                    <!-- /.card-body -->
+                                                                    <div class="modal-footer justify-content-between">
+                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                                                        <button type="submit" class="btn btn-primary" name="simpan_tanggapan">Simpan
+                                                                            Tanggapan</button>
                                                                     </div>
-                                                                    
-                                                                </div>
-                                                                <!-- /.card-body -->
-                                                                <div class="modal-footer justify-content-between">
-                                                                    <button type="button" class="btn btn-danger"
-                                                                    data-dismiss="modal">Batal</button>
-                                                                    <button type="submit" class="btn btn-primary" name="simpan_tanggapan">Simpan
-                                                                        Tanggapan</button> 
-                                                                    </div>
-                                                            </form>
+                                                                </form>
+                                                            </div>
                                                         </div>
+                                                        <!-- /.modal-content -->
                                                     </div>
-                                                    <!-- /.modal-content -->
+                                                    <!-- /.modal-dialog -->
                                                 </div>
-                                                <!-- /.modal-dialog -->
-                                            </div>
-                                            
+
 
                                             <?php
-                                                }
+                                            }
                                             ?>
 
 
-                                            
 
-                                            
+
+
                                         </tbody>
                                     </table>
 
                                 </div>
                                 <div class="card-footer">
-                                    
+
                                 </div>
                             </div>
                             <!-- card------ -->
 
-      
+
                             <!-- MODAL VIEW IMAGE -->
-                            
+
                             <?php
-                                include '../php/koneksi/koneksi.php';
+                            include '../php/koneksi/koneksi.php';
 
-                                $query = "SELECT * FROM pengaduan";
+                            $query = "SELECT * FROM pengaduan";
 
-                                $result = mysqli_query($koneksi, $query);
+                            $result = mysqli_query($koneksi, $query);
 
-                                // Lakukan perulangan untuk membaca setiap baris hasil query
-                                while ($row = mysqli_fetch_assoc($result)) {   
+                            // Lakukan perulangan untuk membaca setiap baris hasil query
+                            while ($row = mysqli_fetch_assoc($result)) {
                             ?>
 
-                            <div class="modal fade" id="modalviewimage<?= $row['id_pengaduan'] ?>" aria-hidden="true">
-                                
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Foto Pengaduan</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    <div class="modal-body">
-                                        <div class="text-center">
-                                            <img src="../uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; width:100%;">
-                                            </div><hr>
-                                            <div class="card-body">
-                                            <div class="text-left">
-                                                <ul>
-                                                    <li><b>Tanggal Pengaduan :</b> <?= $row['tgl_pengaduan']?></li>
-                                                    <li><b>Isi Pengaduan : </b> <?= $row['isi_laporan']?></li>
-                                                    <li><b>Status Pengaduan : </b> 
-                                                        <?php if ($row['status'] == '0') { ?>
-                                                        <span class="badge bg-warning">Menunggu</span>
-                                                        <?php } else if ($row['status'] == 'proses') { ?>
-                                                            <span class="badge bg-primary">Di Proses</span>
-                                                        <?php } else if ($row['status'] == 'tolak') { ?>
-                                                            <span class="badge bg-danger">Di Tolak</span>
-                                                        <?php } else { ?>
-                                                            <span class="badge bg-success">Selesai</span>
-                                                        <?php } ?>
-                                                    </li>
-                                                    
+                                <div class="modal fade" id="modalviewimage<?= $row['id_pengaduan'] ?>" aria-hidden="true">
 
-
-                                                </ul>
-                                                
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Foto Pengaduan</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
-                                        </div>                                
-                                    </div>
-                                        <div class="modal-footer justify-content-between"> 
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
+                                            <div class="modal-body">
+                                                <div class="text-center">
+                                                    <img src="../uploads/<?= $row['foto'] ?>" style="border:#007BFF solid 3px; border-radius:15px; width:100%;">
+                                                </div>
+                                                <hr>
+                                                <div class="card-body">
+                                                    <div class="text-left">
+                                                        <ul>
+                                                            <li><b>Tanggal Pengaduan :</b> <?= $row['tgl_pengaduan'] ?></li>
+                                                            <li><b>Isi Pengaduan : </b> <?= $row['isi_laporan'] ?></li>
+                                                            <li><b>Status Pengaduan : </b>
+                                                                <?php if ($row['status'] == '0') { ?>
+                                                                    <span class="badge bg-warning">Menunggu</span>
+                                                                <?php } else if ($row['status'] == 'proses') { ?>
+                                                                    <span class="badge bg-primary">Di Proses</span>
+                                                                <?php } else if ($row['status'] == 'tolak') { ?>
+                                                                    <span class="badge bg-danger">Di Tolak</span>
+                                                                <?php } else { ?>
+                                                                    <span class="badge bg-success">Selesai</span>
+                                                                <?php } ?>
+                                                            </li>
+
+
+
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
-                                
-                            </div>
                             <?php } ?>
-
-                           
-                        
-
-                            
 
                         </div>
                         <!-- /.col-md-12 -->
@@ -352,7 +336,7 @@
     <!-- AdminLTE for demo purposes -->
     <!-- <script src="../assets/dist/js/demo.js"></script> -->
 
-    
+
 </body>
 
 </html>

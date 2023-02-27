@@ -28,7 +28,7 @@
             if($data['level']=="admin"){
 
                 // buat session login dan username
-                $_SESSION['id_petugas'] = $id_petugas;
+                $_SESSION['id_petugas'] = $data['id_petugas'];
                 $_SESSION['username'] = $username;
                 $_SESSION['password'] = $password;
                 $_SESSION['level'] = "admin";
@@ -38,7 +38,7 @@
             // cek jika user login sebagai pegawai
             }else if($data['level']=="petugas"){
                 // buat session login dan username
-                $_SESSION['id_petugas'] = $id_petugas;
+                $_SESSION['id_petugas'] = $data['id_petugas'];
                 $_SESSION['username'] = $username;
                 $_SESSION['password'] = $password;
                 $_SESSION['level'] = "petugas";

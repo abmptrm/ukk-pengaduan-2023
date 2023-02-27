@@ -254,20 +254,14 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="post" action="php/pengaduan/simpan_pengaduan.php" enctype="multipart/form-data">
+                                            <form action="php/pengaduan/simpan_pengaduan.php"  method="POST" enctype="multipart/form-data">
                                                 <div class="card-body">
                                                     <div class="form-group">
                                                         <label>Isi Laporan</label>
                                                         <input type="text" name="nik" value="<?= $data['nik']; ?>" hidden>
-                                                        <textarea class="form-control" rows="3" name="isi-laporan" placeholder="Isi Laporan"></textarea>
+                                                        <textarea class="form-control" rows="3" name="isi_laporan" placeholder="Isi Laporan"></textarea>
                                                     </div>
-                                                    <!-- <div class="form-group">
-                                                        <div class="input-group">
-                                                            <div class="custom-file">
-                                                                <input type="file" name="foto" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
+                    
                                                     <div class="form-group">
                                                         <label for="">Upload Foto</label>
                                                         <div class="input-group mb-3">
@@ -288,7 +282,7 @@
                                                 <div class="modal-footer justify-content-between">
                                                     <button type="button" class="btn btn-danger"
                                                     data-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-success" name="simpan-pengaduan">Simpan
+                                                    <button type="submit" class="btn btn-success" name="simpan_pengaduan">Simpan
                                                         Pengaduan</button>
                                                         
                                                         
